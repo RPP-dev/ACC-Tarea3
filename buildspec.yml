@@ -1,9 +1,14 @@
 version: 0.2
 
 phases:
+  install:
+    runtime-versions:
+      python: 3.12
+	
   build:
     commands:
-      - zip function.zip lambda_function.py
+      - echo "Empaquetando la funcion Lambda"
+      - zip lambda_package.zip lambda_function.py
 artifacts:
   files:
-    - function.zip
+    - lambda_package.zip
