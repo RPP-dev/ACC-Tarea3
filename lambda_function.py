@@ -11,7 +11,7 @@ def lambda_handler(event, context):
     # Inicializar la tabla
     table = dynamodb.Table(TABLE_NAME)
     
-    # Clave primaria del registro a actualizar
+    # Podemos tener muchos contadores dependiendo del ID que enviemos
     key = {"id": event["id"]}  
     
     try:
