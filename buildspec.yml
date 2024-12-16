@@ -13,4 +13,3 @@ phases:
 artifacts:
   files:
     - lambdaiac.yml
-    - lambda_function.yml
