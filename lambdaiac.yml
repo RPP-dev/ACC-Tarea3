@@ -6,7 +6,7 @@ Resources:
     Properties:
       FunctionName: LambdaJJR
       Runtime: python3.12
-      Handler: index.lambda_handler
+      Handler: index.handler
       Role: arn:aws:iam::263554529974:role/service-role/role-lambdaJJR
       Code:
         ZipFile: |
