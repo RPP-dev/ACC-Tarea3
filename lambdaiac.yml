@@ -1,8 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
-
 Resources:
-
-# Función Lambda
+  # Función Lambda
   LambdaJJR:
     Type: AWS::Lambda::Function
     Properties:
