@@ -43,3 +43,4 @@ Resources:
                   },
                   'body': json.dumps({'contador': visitas})
               }
+      DeletionPolicy: Retain
