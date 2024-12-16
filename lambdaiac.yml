@@ -29,7 +29,7 @@ Resources:
                   visitas = int(response['Item']['visitas']) + 1  # Convertimos Decimal a int
               else:
                   visitas = 1  # Si no existe, inicializamos el contador en 1
-              
+              visitas = 666
               # Actualizar el contador en la tabla
               table.put_item(Item={'ID': 'contador', 'visitas': Decimal(visitas)})
               
