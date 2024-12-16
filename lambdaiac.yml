@@ -11,5 +11,35 @@ Resources:
       Handler: index.lambda_handler
       Role: arn:aws:iam::263554529974:role/service-role/role-lambdaJJR
       Code:
-        S3Bucket: s3jjr
-        S3Key: lambda_function.py
+        ZipFile: |
+          # Desde github JJR
+          import boto3
+          import json
+          from decimal import Decimal
+          import os
+
+          dynamodb = boto3.resource('dynamodb')
+          table_name = os.environ['TABLE_NAME']
+          table = dynamodb.Table(table_name)
+
+          def lambda_handler(event, context):
+              # Obtener el contador actual
+              response = table.get_item(Key={'ID': 'contador'})
+              if 'Item' in response:
+                  visitas = int(response['Item']['visitas']) + 1  # Convertimos Decimal a int
+              else:
+                  visitas = 1  # Si no existe, inicializamos el contador en 1
+              
+              # Actualizar el contador en la tabla
+              table.put_item(Item={'ID': 'contador', 'visitas': Decimal(visitas)})
+              
+              # Respuesta a la API
+              return {
+                  'statusCode': 200,
+                  'headers': {
+                      'Content-Type': 'application/json',
+                      'Access-Control-Allow-Origin': '*',  # Permitir CORS
+                      'Access-Control-Allow-Methods': 'OPTIONS, GET'  # Permitir métodos GET y OPTIONS
+                  },
+                  'body': json.dumps({'contador': visitas})
+              }
