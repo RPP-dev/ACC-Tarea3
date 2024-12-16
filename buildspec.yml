@@ -9,7 +9,7 @@ phases:
       - pip install --upgrade pip
   build:
     commands:
-      - aws cloudformation validate-template --template-body file://lambdaiac.yml      
+      - aws cloudformation validate-template --template-body file://lambdaiac.yaml      
 artifacts:
   files:
-    - lambdaiac.yml
+    - lambdaiac.yaml
