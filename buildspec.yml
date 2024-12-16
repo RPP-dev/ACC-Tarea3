@@ -7,13 +7,9 @@ phases:
     commands:
       - echo "Instalando dependencias"
       - pip install --upgrade pip
-      - pip install awscli
   build:
     commands:
-      - echo "Empaquetando la funcion Lambda"
-      - zip lambda_package.zip lambda_function.py
-      - aws cloudformation validate-template --template-body file://lambdaiac.yml
-      - aws s3 cp lambda_package.zip s3://s3jjr/codebuild/artifacts/
+      - aws cloudformation validate-template --template-body file://lambdaiac.yml      
 artifacts:
   files:
     - lambdaiac.yml
