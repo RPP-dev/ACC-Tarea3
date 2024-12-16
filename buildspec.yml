@@ -6,10 +6,11 @@ phases:
       python: 3.12
     commands:
       - echo "Instalando dependencias"
-      - pip install --upgrade pip
   build:
     commands:
-      - aws cloudformation validate-template --template-body file://lambdaiac.yaml      
+      - echo "Validando la plantilla"
+      - aws cloudformation validate-template --template-body file://lambdaiac.yml      
 artifacts:
   files:
-    - lambdaiac.yaml
+    - lambdaiac.yml
+    - lambda_function.yml
