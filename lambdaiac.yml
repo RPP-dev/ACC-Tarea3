@@ -6,7 +6,7 @@ Resources:
     Properties:
       FunctionName: LambdaJJR
       Runtime: python3.12
-      Handler: index.handler
+      Handler: lambda_function.lambda_handler
       Role: arn:aws:iam::263554529974:role/service-role/role-lambdaJJR
       Code:
         ZipFile: |
@@ -14,30 +14,25 @@ Resources:
           import boto3
           import json
           from decimal import Decimal
-          import os
-
-          dynamodb = boto3.resource('dynamodb')
-          table_name = os.environ['TABLE_NAME']
-          table = dynamodb.Table(table_name)
 
           def lambda_handler(event, context):
-              # Obtener el contador actual
-              response = table.get_item(Key={'ID': 'contador'})
-              if 'Item' in response:
-                  visitas = int(response['Item']['visitas']) + 1  # Convertimos Decimal a int
-              else:
-                  visitas = 1  # Si no existe, inicializamos el contador en 1
-              
-              # Actualizar el contador en la tabla
-              table.put_item(Item={'ID': 'contador', 'visitas': Decimal(visitas)})
-              
-              # Respuesta a la API
-              return {
-                  'statusCode': 200,
-                  'headers': {
-                      'Content-Type': 'application/json',
-                      'Access-Control-Allow-Origin': '*',  # Permitir CORS
-                      'Access-Control-Allow-Methods': 'OPTIONS, GET'  # Permitir métodos GET y OPTIONS
-                  },
-                  'body': json.dumps({'contador': visitas})
-              }
+            dynamodb = boto3.resource('dynamodb')
+            table = dynamodb.Table('visitor-counter')
+    
+            # Obtener el contador actual
+            response = table.get_item(Key={'id': 'contador'})
+            visitas = int(response['Item']['visitas']) + 1  # Convertimos Decimal a int
+    
+            # Actualizar el contador en la tabla
+            table.update_item(
+              Key={'id': 'contador'},
+              UpdateExpression='SET visitas = :val',
+              ExpressionAttributeValues={':val': Decimal(visitas)}  # Convertimos de vuelta a Decimal para DynamoDB
+            )
+    
+            # Respuesta
+            return {
+              'statusCode': 200,
+              'headers': {'Content-Type': 'application/json'},
+              'body': json.dumps({'visitas': visitas})  # JSON serializable
+            }
