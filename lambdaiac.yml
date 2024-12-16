@@ -1,0 +1,15 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Resources:
+
+# Función Lambda
+  LambdaJJR2:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: LambdaJJR2
+      Runtime: python3.12
+      Handler: index.lambda_handler
+      Role: arn:aws:iam::263554529974:role/service-role/role-lambdaJJR
+      Code:
+        S3Bucket: s3jjr
+        S3Key: lambda_function.py
