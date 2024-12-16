@@ -12,4 +12,4 @@ Resources:
       Role: arn:aws:iam::263554529974:role/service-role/role-lambdaJJR
       Code:
         S3Bucket: s3jjr
-        S3Key: codebuild/artifacts/lambda_package.zip
+        S3Key: lambda_function.py
