@@ -17,7 +17,7 @@ Resources:
 
           def lambda_handler(event, context):
             dynamodb = boto3.resource('dynamodb')
-            table = dynamodb.Table('visitor-counter')
+            table = dynamodb.Table('ACCJJR')
     
             # Obtener el contador actual
             response = table.get_item(Key={'id': 'contador'})
