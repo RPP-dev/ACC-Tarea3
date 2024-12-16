@@ -4,6 +4,9 @@ phases:
   install:
     runtime-versions:
       python: 3.12
+    commands:
+      - echo "Instalando dependencias"
+      - pip install --upgrade pip
   build:
     commands:
       - echo "Empaquetando la funcion Lambda"
