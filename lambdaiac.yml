@@ -10,7 +10,7 @@ Resources:
       Role: arn:aws:iam::263554529974:role/service-role/role-lambdaJJR
       Code:
         ZipFile: |
-          # Desde github JJRv5
+          # Desde github JJRv6
           import boto3
           import json
           from decimal import Decimal
