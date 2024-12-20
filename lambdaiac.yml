@@ -10,7 +10,7 @@ Resources:
       Role: arn:aws:iam::263554529974:role/service-role/role-lambdaJJR
       Code:
         ZipFile: |
-          # Desde github JJRv7
+          # Desde github JJRv8
           import boto3
           import json
           from decimal import Decimal
@@ -30,7 +30,6 @@ Resources:
               ExpressionAttributeValues={':val': Decimal(visitas)}  # Convertimos de vuelta a Decimal para DynamoDB
             )
 
-            visitas = 1000
             # Respuesta
             return {
               'statusCode': 200,
